@@ -53,11 +53,15 @@ $userSettings = $settings->fetchAll(PDO::FETCH_KEY_PAIR);
     <main class="max-w-4xl mx-auto p-6 flex-grow w-full min-h-[calc(100vh-12rem)]">
         <h2 class="text-3xl font-bold mb-6 dark:text-gray-300 text-center">
             <?= t('personal_settings', $translations, $lang) ?>
-        </h2> <?php if (!empty($_SESSION['success_message'])): ?>
+        </h2> 
+        <?php 
+        if (!empty($_SESSION['success_message'])): 
+            $success_message = $_SESSION['success_message'];
+            unset($_SESSION['success_message']);
+        ?>
             <div class="mb-4 p-4 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded border border-green-400 dark:border-green-600">
-                <?= htmlspecialchars($_SESSION['success_message']) ?>
+                <?= htmlspecialchars($success_message) ?>
             </div>
-            <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
 
         <form method="post" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded shadow max-w-xl mx-auto">
