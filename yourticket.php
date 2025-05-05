@@ -48,6 +48,11 @@ try {
       <p class="italic text-gray-500 dark:text-gray-400">
         <?= t('no_tickets', $translations, $lang) ?>
       </p>
+      <div class="mt-4">
+        <a href="create_ticket.php" class="inline-block bg-blue-600 hover:bg-blue-700 dark:bg-blue-800 dark:hover:bg-blue-900 text-white px-4 py-2 rounded-lg transition">
+          <?= t('create_ticket', $translations, $lang) ?>
+        </a>
+      </div>
     <?php else: ?>
       <ul class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <?php foreach ($tickets as $t): ?>

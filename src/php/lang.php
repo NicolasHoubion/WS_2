@@ -196,6 +196,7 @@ $translations = [
         'search' => 'Search',
         'reset' => 'Reset',
         'edit_user' => 'Edit User',
+        'settings_updated' => 'Settings updated successfully',
     ],
 
     // DUTCH TRANSLATE

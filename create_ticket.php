@@ -62,50 +62,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= t('create_ticket', $translations, $lang) ?></title>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <?php require_once 'src/components/header.php'; ?>
 
-    <main class="max-w-7xl mx-auto p-6">
-        <h2 class="text-3xl font-bold mb-6 dark:text-gray-300">
-            <?= t('create_ticket', $translations, $lang) ?>
-        </h2>
+    <main class="flex-1 p-6">
+        <div class="max-w-7xl mx-auto min-h-[500px] py-12">
+            <h2 class="text-3xl font-bold mb-6 dark:text-gray-300">
+                <?= t('create_ticket', $translations, $lang) ?>
+            </h2>
 
-        <?php if (isset($_SESSION["error_message"])): ?>
-            <div class="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 p-4 mb-6 rounded">
-                <?= htmlspecialchars($_SESSION["error_message"]) ?>
-            </div>
-            <?php unset($_SESSION["error_message"]); ?>
-        <?php endif; ?>
+            <?php if (isset($_SESSION["error_message"])): ?>
+                <div class="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 p-4 mb-6 rounded">
+                    <?= htmlspecialchars($_SESSION["error_message"]) ?>
+                </div>
+                <?php unset($_SESSION["error_message"]); ?>
+            <?php endif; ?>
 
-        <form method="post" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <div class="mb-6">
-                <label class="block font-semibold mb-2 dark:text-gray-300">
-                    <?= t('title', $translations, $lang) ?>
-                </label>
-                <input type="text" 
-                       name="title" 
-                       id="title"
-                       required
-                       class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500">
-            </div>
+            <form method="post" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2 dark:text-gray-300">
+                        <?= t('title', $translations, $lang) ?>
+                    </label>
+                    <input type="text" 
+                           name="title" 
+                           id="title"
+                           required
+                           class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500">
+                </div>
 
-            <div class="mb-6">
-                <label class="block font-semibold mb-2 dark:text-gray-300">
-                    <?= t('message', $translations, $lang) ?>
-                </label>
-                <textarea 
-                    name="message" 
-                    id="message"
-                    rows="5"
-                    required
-                    class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500"
-                ></textarea>
-            </div>
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2 dark:text-gray-300">
+                        <?= t('message', $translations, $lang) ?>
+                    </label>
+                    <textarea 
+                        name="message" 
+                        id="message"
+                        rows="5"
+                        required
+                        class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500"
+                    ></textarea>
+                </div>
 
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">
-                <?= t('create_ticket_button', $translations, $lang) ?>
-            </button>
-        </form>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">
+                    <?= t('create_ticket_button', $translations, $lang) ?>
+                </button>
+            </form>
+        </div>
     </main>
 
     <?php require_once 'src/components/footer.php'; ?>
