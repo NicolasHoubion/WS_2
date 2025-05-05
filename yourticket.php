@@ -9,6 +9,24 @@ $user_id = $_SESSION['id'] ?? 0;
 $lang = getLanguage($db, $user_id);
 $theme = getTheme($db, $user_id);
 
+// Récupération du rôle de l'utilisateur connecté
+$user_role = '';
+if ($user_id) {
+    try {
+        $stmtRole = $db->prepare(
+            "SELECT r.Name AS RoleName 
+             FROM Users u
+             JOIN Roles r ON u.Role_id = r.Id
+             WHERE u.Id = :userId"
+        );
+        $stmtRole->bindParam(':userId', $user_id, PDO::PARAM_INT);
+        $stmtRole->execute();
+        $user_role = strtolower($stmtRole->fetchColumn() ?: '');
+    } catch (PDOException $e) {
+        $user_role = '';
+    }
+}
+
 // Requête pour les tickets
 $sql = "
   SELECT
@@ -56,11 +74,23 @@ try {
     <?php else: ?>
       <ul class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         <?php foreach ($tickets as $t): ?>
-          <li class="relative bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition p-6 group">
+          <li class="relative bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition p-6 pt-10 group">
             <?php if ($t['unread_count'] > 0): ?>
               <span class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full">
                 <?= $t['unread_count'] ?>
               </span>
+            <?php endif; ?>
+
+            <?php if (
+                in_array($user_role, ['admin', 'helper']) ||
+                $t['User_id'] == $user_id
+            ): ?>
+              <a href="update_ticket_status.php?id=<?= $t['Id'] ?>&action=close"
+                 title="<?= t('close_ticket', $translations, $lang) ?>"
+                 class="absolute top-2 left-4 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition"
+                 style="font-size: 1.2rem;">
+                🚫
+              </a>
             <?php endif; ?>
 
             <a href="ticket_view.php?id=<?= $t['Id'] ?>" class="block h-full">
