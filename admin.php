@@ -134,9 +134,9 @@ function hasPermission($permission, $permissions)
     <title><?= t('admin_panel', $translations, $lang) ?></title>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6 flex-1 flex flex-col">
         <h1 class="text-4xl font-bold mb-8 text-center"><?= t('admin_panel', $translations, $lang) ?></h1>
 
         <!-- SECTION TICKETS -->
