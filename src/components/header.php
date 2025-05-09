@@ -35,11 +35,11 @@ tailwind.config = {
 </script>
 
 <!-- Barre de navigation -->
-<nav class="bg-blue-600 p-4 shadow-lg">
+<nav class="bg-blue-600 p-4 shadow-xl rounded-b-2xl">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
     
     <!-- Logo -->
-    <h1 class="text-white dark:text-gray-100 text-2xl font-bold">
+    <h1 class="text-white dark:text-gray-100 text-2xl font-extrabold tracking-tight drop-shadow">
       <a href="index.php" class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
         <?= t('YourTicket', $translations, $lang) ?>
       </a>
@@ -50,14 +50,14 @@ tailwind.config = {
       
       <!-- Lien Tickets -->
       <li>
-        <a href="yourticket.php" class="hover:text-yellow-300 transition-colors">
+        <a href="yourticket.php" class="hover:bg-blue-700 dark:hover:bg-blue-900 px-3 py-1 rounded-lg transition-colors font-medium">
           <?= t('Tickets', $translations, $lang) ?>
         </a>
       </li>
       
       <!-- Lien Paramètres -->
       <li>
-        <a href="param.php" class="hover:text-yellow-300 transition-colors">
+        <a href="param.php" class="hover:bg-blue-700 dark:hover:bg-blue-900 px-3 py-1 rounded-lg transition-colors font-medium">
           <?= t('Settings', $translations, $lang) ?>
         </a>
       </li>
@@ -67,7 +67,7 @@ tailwind.config = {
         <li class="relative group" id="profile-menu">
           
           <!-- Bouton Profil -->
-          <button class="flex items-center space-x-2 hover:text-yellow-300 transition-colors focus:outline-none">
+          <button class="flex items-center space-x-2 hover:text-yellow-300 transition-colors focus:outline-none font-semibold">
             <span>👤 <?= htmlspecialchars($_SESSION['fname']) ?></span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -75,14 +75,14 @@ tailwind.config = {
           </button>
 
           <!-- Sous-menu Déroulant -->
-          <ul class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 invisible group-hover:visible">
+          <ul class="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 invisible group-hover:visible z-20">
             <li>
-              <a href="profil.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+              <a href="profil.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-blue-800 rounded-t-xl">
                 <?= t('Profile', $translations, $lang) ?>
               </a>
             </li>
             <li>
-              <a href="src/php/logout.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+              <a href="src/php/logout.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-blue-800 rounded-b-xl">
                 <?= t('Logout', $translations, $lang) ?>
               </a>
             </li>
@@ -92,7 +92,7 @@ tailwind.config = {
         <!-- Lien Admin si autorisé -->
         <?php if($isAdmin): ?>
           <li>
-            <a href="admin.php" class="hover:text-yellow-300 transition-colors">
+            <a href="admin.php" class="hover:bg-red-700 dark:hover:bg-red-900 px-3 py-1 rounded-lg transition-colors font-bold">
               <?= t('Admin', $translations, $lang) ?>
             </a>
           </li>
@@ -101,7 +101,7 @@ tailwind.config = {
       <!-- Si non connecté -->
       <?php else: ?>
         <li>
-          <a href="login.php" class="hover:text-yellow-300 transition-colors">
+          <a href="login.php" class="hover:bg-blue-700 dark:hover:bg-blue-900 px-3 py-1 rounded-lg transition-colors font-medium">
             <?= t('Login', $translations, $lang) ?>
           </a>
         </li>

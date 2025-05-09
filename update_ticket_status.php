@@ -3,18 +3,21 @@ session_start();
 require_once 'src/php/dbconn.php';
 require_once 'src/php/lang.php';
 
+$userId = $_SESSION['id'] ?? 0;
+$lang = getLanguage($db, $userId);
+$theme = getTheme($db, $userId);
+
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit;
 }
 
-$userId = $_SESSION['id'];
 $role = $_SESSION['role'] ?? '';
-$lang = getLanguage($db, $userId);
 
 // Vérification des paramètres
 if (!isset($_GET['id'], $_GET['action']) || $_GET['action'] !== 'close') {
-    echo t('invalid_request', $translations, $lang);
+    $_SESSION['error_message'] = t('invalid_request', $translations, $lang);
+    header("Location: yourticket.php");
     exit;
 }
 
@@ -22,8 +25,8 @@ $ticketId = intval($_GET['id']);
 
 // Vérification des permissions
 if (!in_array($role, ['admin', 'helper'])) {
-    header("HTTP/1.1 403 Forbidden");
-    echo t('no_permission', $translations, $lang);
+    $_SESSION['error_message'] = t('no_permission', $translations, $lang);
+    header("Location: yourticket.php");
     exit;
 }
 
@@ -34,7 +37,8 @@ try {
     $stmtCheck->execute();
 
     if ($stmtCheck->rowCount() === 0) {
-        echo t('ticket_not_found', $translations, $lang);
+        $_SESSION['error_message'] = t('ticket_not_found', $translations, $lang);
+        header("Location: yourticket.php");
         exit;
     }
 
@@ -44,10 +48,12 @@ try {
     $stmtClose->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
     $stmtClose->execute();
 
+    $_SESSION['success_message'] = t('ticket_closed', $translations, $lang);
     header("Location: yourticket.php");
     exit;
 } catch (PDOException $e) {
-    echo t('database_error', $translations, $lang) . ": " . $e->getMessage();
+    $_SESSION['error_message'] = t('database_error', $translations, $lang) . ": " . $e->getMessage();
+    header("Location: yourticket.php");
     exit;
 }
 ?>

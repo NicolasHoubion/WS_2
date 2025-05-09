@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
     }
 
+    // Mettre à jour $lang si la langue a été changée
+    if (isset($_POST['settings']['language'])) {
+        $lang = $_POST['settings']['language'];
+    }
+
     $_SESSION['success_message'] = t('settings_updated', $translations, $lang);
     header("Location: param.php");
     exit;
@@ -64,16 +69,15 @@ $userSettings = $settings->fetchAll(PDO::FETCH_KEY_PAIR);
             </div>
         <?php endif; ?>
 
-        <form method="post" class="space-y-6 bg-white dark:bg-gray-800 p-6 rounded shadow max-w-xl mx-auto">
+        <form method="post" class="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl max-w-xl mx-auto border border-blue-100 dark:border-blue-900">
             <div>
                 <label class="block font-semibold mb-2 dark:text-gray-300"><?= t('language', $translations, $lang) ?></label>
-                <select name="settings[language]" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                <select name="settings[language]" class="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
                     <option value="en" <?= ($userSettings['language'] ?? 'en') === 'en' ? 'selected' : '' ?>>English</option>
                     <option value="fr" <?= ($userSettings['language'] ?? 'en') === 'fr' ? 'selected' : '' ?>>Français</option>
                     <option value="es" <?= ($userSettings['language'] ?? 'en') === 'es' ? 'selected' : '' ?>>Español</option>
                     <option value="nl" <?= ($userSettings['language'] ?? 'en') === 'nl' ? 'selected' : '' ?>>Nederlands</option>
                     <option value="zh" <?= ($userSettings['language'] ?? 'en') === 'zh' ? 'selected' : '' ?>>中文</option>
-                    <option value="hi" <?= ($userSettings['language'] ?? 'en') === 'hi' ? 'selected' : '' ?>>भारतीय</option>
                     <option value="pa" <?= ($userSettings['language'] ?? 'en') === 'pa' ? 'selected' : '' ?>>ਪੰਜਾਬੀ</option>
                 </select>
             </div>
@@ -83,18 +87,18 @@ $userSettings = $settings->fetchAll(PDO::FETCH_KEY_PAIR);
                 <div class="flex space-x-4">
                     <label class="flex items-center dark:text-gray-400">
                         <input type="radio" name="settings[theme]" value="light"
-                            <?= ($userSettings['theme'] ?? 'light') === 'light' ? 'checked' : '' ?> class="mr-2">
+                            <?= ($userSettings['theme'] ?? 'light') === 'light' ? 'checked' : '' ?> class="mr-2 accent-blue-600">
                         <?= t('light_theme', $translations, $lang) ?>
                     </label>
                     <label class="flex items-center dark:text-gray-400">
                         <input type="radio" name="settings[theme]" value="dark"
-                            <?= ($userSettings['theme'] ?? 'light') === 'dark' ? 'checked' : '' ?> class="mr-2">
+                            <?= ($userSettings['theme'] ?? 'light') === 'dark' ? 'checked' : '' ?> class="mr-2 accent-blue-600">
                         <?= t('dark_theme', $translations, $lang) ?>
                     </label>
                 </div>
             </div>
 
-            <button type="submit" class="bg-blue-600 dark:bg-blue-800 text-white px-6 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-900 transition">
+            <button type="submit" class="bg-blue-600 dark:bg-blue-800 text-white px-8 py-3 rounded-xl hover:bg-blue-700 dark:hover:bg-blue-900 transition font-semibold">
                 <?= t('save', $translations, $lang) ?>
             </button>
         </form>
@@ -102,5 +106,4 @@ $userSettings = $settings->fetchAll(PDO::FETCH_KEY_PAIR);
 
     <?php require_once 'src/components/footer.php'; ?>
 </body>
-
 </html>

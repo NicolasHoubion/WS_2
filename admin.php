@@ -142,10 +142,10 @@ function hasPermission($permission, $permissions)
         <!-- SECTION TICKETS -->
         <section class="mb-12"> 
             <h2 class="text-3xl font-semibold mb-4"><?= t('ticket_management', $translations, $lang) ?></h2>
-            <div class="overflow-y-auto max-h-[500px] bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+            <div class="overflow-y-auto max-h-[500px] bg-gray-100 dark:bg-gray-800 p-4 rounded-2xl shadow-xl border border-blue-100 dark:border-blue-900">
                 <?php if (count($tickets) > 0): ?>
-                    <table class="min-w-full">
-                        <thead class="bg-gray-200 dark:bg-gray-700">
+                    <table class="min-w-full rounded-xl overflow-hidden">
+                        <thead class="bg-blue-100 dark:bg-blue-900">
                             <tr>
                                 <th class="px-4 py-2 text-left">ID</th>
                                 <th class="px-4 py-2 text-left"><?= t('title', $translations, $lang) ?></th>
@@ -156,15 +156,20 @@ function hasPermission($permission, $permissions)
                         </thead>
                         <tbody>
                             <?php foreach ($tickets as $ticket): ?>
-                                <tr class="bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 border-b">
+                                <tr class="bg-white dark:bg-gray-900 hover:bg-blue-50 dark:hover:bg-blue-950 border-b transition">
                                     <td class="px-4 py-2 dark:text-gray-300"><?= htmlspecialchars($ticket['Id']) ?></td>
                                     <td class="px-4 py-2 dark:text-gray-300"><?= htmlspecialchars($ticket['Title']) ?></td>
                                     <td class="px-4 py-2 dark:text-gray-300"><?= htmlspecialchars($ticket['Username']) ?></td>
                                     <td class="px-4 py-2 dark:text-gray-300"><?= formatDateFr($ticket['Created_at']) ?></td>
                                     <td class="px-4 py-2">
                                         <a href="ticket_view.php?id=<?= $ticket['Id'] ?>"
-                                            class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-800 dark:hover:bg-blue-900">
+                                            class="inline-block bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition dark:bg-blue-800 dark:hover:bg-blue-900 font-semibold shadow">
                                             <?= t('view', $translations, $lang) ?>
+                                        </a>
+                                        <a href="delete_ticket.php?id=<?= $ticket['Id'] ?>"
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce ticket ? Cette action est irréversible.');"
+                                            class="inline-block bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 transition dark:bg-red-700 dark:hover:bg-red-800 font-semibold shadow ml-2">
+                                            <?= t('delete', $translations, $lang) ?>
                                         </a>
                                     </td>
                                 </tr>
@@ -183,17 +188,16 @@ function hasPermission($permission, $permissions)
             <form method="GET" class="mb-6 flex gap-2">
                 <input type="text" name="search"
                     placeholder="<?= t('search_users', $translations, $lang) ?>"
-                    class="flex-1 p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-                    value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                    class="flex-1 p-3 rounded-lg border dark:bg-gray-700 dark:border-gray-600">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-xl hover:bg-blue-600 transition font-semibold shadow">
                     <?= t('search', $translations, $lang) ?>
                 </button>
-                <a href="admin.php" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition dark:bg-gray-600 dark:text-gray-200">
+                <a href="admin.php" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-xl hover:bg-gray-400 transition dark:bg-gray-600 dark:text-gray-200 font-semibold shadow">
                     <?= t('reset', $translations, $lang) ?>
                 </a>
             </form>
             <?php if (count($users) > 0 && (hasPermission('Manage Users', $currentUserPermissions) || hasPermission('Admin Access', $currentUserPermissions))): ?>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <?php foreach ($users as $user): ?>
                         <?php
                         $roleName = strtolower($user['role']);
@@ -212,14 +216,14 @@ function hasPermission($permission, $permissions)
                                 break;
                         }
                         ?>
-                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-blue-100 dark:border-blue-900">
                             <div class="flex justify-between items-center">
                                 <h3 class="text-2xl font-bold dark:text-gray-300"><?= htmlspecialchars($user['username']) ?></h3>
-                                <span class="px-2 py-1 rounded text-sm font-semibold <?= $badgeClass; ?>">
+                                <span class="px-3 py-1 rounded-xl text-sm font-semibold <?= $badgeClass; ?>">
                                     <?= htmlspecialchars($user['role']) ?>
                                 </span>
                             </div>
-                            <div class="mt-2">
+                            <div class="mt-4">
                                 <p class="font-semibold dark:text-gray-400"><?= t('permissions', $translations, $lang) ?> :</p>
                                 <ul class="list-disc list-inside text-sm dark:text-gray-300">
                                     <?php foreach ($user['permissions'] as $permission): ?>
@@ -227,13 +231,13 @@ function hasPermission($permission, $permissions)
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
-                            <div class="mt-4 space-x-2">
+                            <div class="mt-6 space-x-2">
                                 <a href="edit_user.php?id=<?= $user['user_id'] ?>"
-                                    class="px-3 py-1 bg-green-500 rounded hover:bg-green-600 text-sm inline-block dark:bg-green-700 dark:hover:bg-green-800">
+                                    class="px-4 py-2 bg-green-500 rounded-xl hover:bg-green-600 text-sm inline-block dark:bg-green-700 dark:hover:bg-green-800 font-semibold shadow">
                                     <?= t('edit', $translations, $lang) ?>
                                 </a>
                                 <a href="delete_user.php?id=<?= $user['user_id'] ?>"
-                                    class="px-3 py-1 bg-red-500 rounded hover:bg-red-600 text-sm inline-block dark:bg-red-700 dark:hover:bg-red-800">
+                                    class="px-4 py-2 bg-red-500 rounded-xl hover:bg-red-600 text-sm inline-block dark:bg-red-700 dark:hover:bg-red-800 font-semibold shadow">
                                     <?= t('delete', $translations, $lang) ?>
                                 </a>
                             </div>
@@ -248,5 +252,4 @@ function hasPermission($permission, $permissions)
 
     <?php require_once 'src/components/footer.php'; ?>
 </body>
-
 </html>

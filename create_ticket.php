@@ -157,8 +157,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php unset($_SESSION["error_message"]); ?>
             <?php endif; ?>
 
-            <form method="post" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <div class="mb-6">
+            <form method="post" class="bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-xl border border-blue-100 dark:border-blue-900">
+                <div class="mb-8">
                     <label class="block font-semibold mb-2 dark:text-gray-300">
                         <?= t('title', $translations, $lang) ?>
                     </label>
@@ -166,23 +166,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                            name="title" 
                            id="title"
                            required
-                           class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500">
+                           class="w-full p-4 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500">
                 </div>
 
-                <div class="mb-6">
+                <div class="mb-8">
                     <label class="block font-semibold mb-2 dark:text-gray-300">
                         <?= t('message', $translations, $lang) ?>
                     </label>
                     <textarea 
                         name="message" 
                         id="message"
-                        rows="5"
+                        rows="6"
                         required
-                        class="w-full p-3 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500"
+                        class="w-full p-4 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-blue-500"
                     ></textarea>
                 </div>
 
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow transition">
                     <?= t('create_ticket_button', $translations, $lang) ?>
                 </button>
             </form>

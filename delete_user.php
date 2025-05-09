@@ -1,14 +1,20 @@
 <?php
 session_start();
 require_once './src/php/dbconn.php';
+require_once './src/php/lang.php';
+
+$user_id = $_SESSION['id'] ?? 0;
+$lang = getLanguage($db, $user_id);
+$theme = getTheme($db, $user_id);
 
 if (!isset($_GET['id'])) {
-    die("Aucun utilisateur spécifié.");
+    $_SESSION['error_message'] = t('no_user_specified', $translations, $lang);
+    header("Location: admin.php");
+    exit;
 }
 
 $userId = intval($_GET['id']);
 
-// Supprimer les tickets liés à cet utilisateur
 try {
     $db->beginTransaction();
 
@@ -22,11 +28,14 @@ try {
 
     $db->commit();
 
+    $_SESSION['success_message'] = t('user_deleted', $translations, $lang);
     header("Location: admin.php");
     exit;
 
 } catch (PDOException $e) {
     $db->rollBack();
-    echo "Erreur lors de la suppression : " . $e->getMessage();
+    $_SESSION['error_message'] = t('delete_error', $translations, $lang) . ": " . $e->getMessage();
+    header("Location: admin.php");
+    exit;
 }
 ?>

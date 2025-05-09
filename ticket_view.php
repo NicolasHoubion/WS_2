@@ -95,11 +95,27 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket #<?= htmlspecialchars($ticket['Id']); ?></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              light: '#3b82f6',
+              dark: '#1e40af'
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
   <?php require_once 'src/components/header.php'; ?>
 
-  <main class="flex-grow max-w-4xl mx-auto p-6">
+  <main class="flex-grow w-full max-w-5xl mx-auto p-8">
     <!-- Détails du ticket -->
     <header class="mb-6 border-b pb-4 dark:border-gray-700">
       <h1 class="text-3xl font-bold mb-1 dark:text-gray-300">🎫 Ticket #<?= htmlspecialchars($ticket['Id']); ?> - <?= htmlspecialchars($ticket['Title']); ?></h1>
@@ -136,7 +152,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                    class="w-10 h-10 rounded-full object-cover">
             <?php endif; ?>
 
-            <div class="max-w-[70%] p-4 rounded-lg shadow <?= $bubbleClass; ?>">
+            <div class="max-w-[90%] p-4 rounded-lg shadow <?= $bubbleClass; ?>">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-semibold"><?= htmlspecialchars($msg['Username']); ?></span>
                 <span class="text-xs text-gray-500 dark:text-gray-400"><?= date('H:i', strtotime($msg['Created_at'])); ?></span>

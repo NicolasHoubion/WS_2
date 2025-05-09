@@ -57,19 +57,19 @@ $theme = getTheme($db, $user_id);
         <p class="text-lg mb-8"><?= t('welcome_subtext', $translations, $lang) ?></p>
 
         <!-- Cartes de fonctionnalités -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <h2 class="text-xl font-semibold mb-3"><?= t('create_ticket', $translations, $lang) ?></h2>
-                <p class="mb-4"><?= t('create_ticket_help', $translations, $lang) ?></p>
-                <a href="create_ticket.php" class="inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded hover:opacity-90 transition">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border border-blue-100 dark:border-blue-900 hover:-translate-y-1 hover:scale-105 duration-200">
+                <h2 class="text-xl font-bold mb-3 text-blue-700 dark:text-blue-300"><?= t('create_ticket', $translations, $lang) ?></h2>
+                <p class="mb-6 text-gray-600 dark:text-gray-400"><?= t('create_ticket_help', $translations, $lang) ?></p>
+                <a href="create_ticket.php" class="inline-block bg-blue-600 dark:bg-blue-800 text-white px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-700 dark:hover:bg-blue-900 transition">
                     <?= t('create', $translations, $lang) ?>
                 </a>
             </div>
 
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <h2 class="text-xl font-semibold mb-3"><?= t('my_tickets', $translations, $lang) ?></h2>
-                <p class="mb-4"><?= t('my_tickets_help', $translations, $lang) ?></p>
-                <a href="yourticket.php" class="inline-block bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded hover:opacity-90 transition">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border border-blue-100 dark:border-blue-900 hover:-translate-y-1 hover:scale-105 duration-200">
+                <h2 class="text-xl font-bold mb-3 text-blue-700 dark:text-blue-300"><?= t('my_tickets', $translations, $lang) ?></h2>
+                <p class="mb-6 text-gray-600 dark:text-gray-400"><?= t('my_tickets_help', $translations, $lang) ?></p>
+                <a href="yourticket.php" class="inline-block bg-blue-600 dark:bg-blue-800 text-white px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-700 dark:hover:bg-blue-900 transition">
                     <?= t('view', $translations, $lang) ?>
                 </a>
             </div>

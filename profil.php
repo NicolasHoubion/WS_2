@@ -115,10 +115,10 @@ if (isset($_POST['submit'])) {
         <div class="mb-10 flex flex-col items-center">
             <img src="src/images/<?= htmlspecialchars($user['Image'] ?: 'image_defaut.avif'); ?>" 
                  alt="<?= t('profile_picture', $translations, $lang) ?>" 
-                 class="w-36 h-36 rounded-full shadow-lg border-4 border-white dark:border-gray-800 object-cover">
+                 class="w-40 h-40 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 object-cover ring-4 ring-blue-200 dark:ring-blue-900 transition hover:scale-105 duration-200">
         </div>
 
-        <div class="bg-white dark:bg-gray-800 p-8 shadow-xl rounded-2xl mb-10">
+        <div class="bg-white dark:bg-gray-800 p-10 shadow-2xl rounded-2xl mb-10 border border-blue-100 dark:border-blue-900">
             <h3 class="text-2xl font-semibold mb-4 border-b border-gray-300 dark:border-gray-700 pb-2 dark:text-gray-300">
                 <?= t('profile_details', $translations, $lang) ?>
             </h3>
@@ -144,20 +144,20 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
 
-        <form action="profil.php" method="post" enctype="multipart/form-data" class="bg-white dark:bg-gray-800 p-8 shadow-xl rounded-2xl mb-10">
-            <div class="mb-6">
+        <form action="profil.php" method="post" enctype="multipart/form-data" class="bg-white dark:bg-gray-800 p-10 shadow-2xl rounded-2xl mb-10 border border-blue-100 dark:border-blue-900">
+            <div class="mb-8">
                 <label for="profile_image" class="block text-lg font-semibold mb-2 text-center dark:text-gray-300">
                     <?= t('change_profile_picture', $translations, $lang) ?>
                 </label>
                 <div class="flex justify-center">
                     <input type="file" name="profile_image" id="profile_image" accept="image/*" class="hidden">
-                    <label for="profile_image" class="cursor-pointer bg-blue-600 dark:bg-blue-800 text-white py-3 px-8 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 transition">
+                    <label for="profile_image" class="cursor-pointer bg-blue-600 dark:bg-blue-800 text-white py-3 px-10 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 transition font-semibold shadow">
                         <?= t('select_image', $translations, $lang) ?>
                     </label>
                 </div>
             </div>
-            <div class="mt-6">
-                <button type="submit" name="submit" class="w-full bg-blue-600 dark:bg-blue-800 text-white py-3 px-8 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 transition">
+            <div class="mt-8">
+                <button type="submit" name="submit" class="w-full bg-blue-600 dark:bg-blue-800 text-white py-3 px-10 rounded-full hover:bg-blue-700 dark:hover:bg-blue-900 transition font-semibold shadow">
                     <?= t('update', $translations, $lang) ?>
                 </button>
             </div>
