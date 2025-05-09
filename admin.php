@@ -4,10 +4,56 @@ require_once __DIR__ . '/src/php/dbconn.php';
 require_once __DIR__ . '/src/php/lang.php';
 require_once __DIR__ . '/src/components/header.php';
 
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: 0");
+
 // Récupération des préférences
 $user_id = $_SESSION['id'] ?? 0;
 $lang = getLanguage($db, $user_id);
 $theme = getTheme($db, $user_id);
+
+// Vérification des permissions (doit être AVANT la suppression)
+$currentUserPermissions = [];
+if ($user_id > 0) {
+    try {
+        $stmt = $db->prepare("
+            SELECT p.Name 
+            FROM Users u
+            JOIN Roles r ON u.Role_id = r.Id
+            JOIN Permission_Roles pr ON r.Id = pr.Role_id
+            JOIN Permissions p ON pr.Permission_id = p.Id
+            WHERE u.Id = :user_id
+        ");
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+        $currentUserPermissions = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    } catch (PDOException $e) {
+        $currentUserPermissions = [];
+    }
+}
+
+// Suppression de ticket si requête POST
+function hasPermission($permission, $permissions)
+{
+    return is_array($permissions) && in_array($permission, $permissions);
+}
+
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && isset($_POST['delete_ticket_id'])
+    && (hasPermission('Delete Tickets', $currentUserPermissions) || hasPermission('Admin Access', $currentUserPermissions))
+) {
+    $ticketIdToDelete = intval($_POST['delete_ticket_id']);
+    try {
+        $stmt = $db->prepare("UPDATE Ticket SET Deleted_at = NOW() WHERE Id = :id");
+        $stmt->bindValue(':id', $ticketIdToDelete, PDO::PARAM_INT);
+        $stmt->execute();
+        header("Location: admin.php?deleted=1");
+        exit;
+    } catch (PDOException $e) {
+        // Optionnel : message d'erreur
+    }
+}
 
 // Fonction utilitaire pour formater la date en français
 function formatDateFr($datetime)
@@ -96,33 +142,6 @@ try {
 } catch (PDOException $e) {
     $users = [];
 }
-
-// Vérification des permissions
-$currentUserPermissions = [];
-$currentUserPermissions = [];
-if ($user_id > 0) {
-    try {
-        $stmt = $db->prepare("
-            SELECT p.Name 
-            FROM Users u
-            JOIN Roles r ON u.Role_id = r.Id
-            JOIN Permission_Roles pr ON r.Id = pr.Role_id
-            JOIN Permissions p ON pr.Permission_id = p.Id
-            WHERE u.Id = :user_id
-        ");
-        $stmt->bindValue(':user_id', $user_id);
-        $stmt->execute();
-        $currentUserPermissions = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    } catch (PDOException $e) {
-        // Gérer l'erreur si nécessaire
-    }
-}
-
-
-function hasPermission($permission, $permissions)
-{
-    return in_array($permission, $permissions);
-}
 ?>
 
 <!DOCTYPE html>
@@ -166,11 +185,13 @@ function hasPermission($permission, $permissions)
                                             class="inline-block bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition dark:bg-blue-800 dark:hover:bg-blue-900 font-semibold shadow">
                                             <?= t('view', $translations, $lang) ?>
                                         </a>
-                                        <a href="delete_ticket.php?id=<?= $ticket['Id'] ?>"
-                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce ticket ? Cette action est irréversible.');"
-                                            class="inline-block bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 transition dark:bg-red-700 dark:hover:bg-red-800 font-semibold shadow ml-2">
-                                            <?= t('delete', $translations, $lang) ?>
-                                        </a>
+                                        <form method="POST" action="admin.php" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ticket ? Cette action est irréversible.');">
+                                            <input type="hidden" name="delete_ticket_id" value="<?= $ticket['Id'] ?>">
+                                            <button type="submit"
+                                                class="inline-block bg-red-500 text-white px-5 py-2 rounded-xl hover:bg-red-600 transition dark:bg-red-700 dark:hover:bg-red-800 font-semibold shadow ml-2">
+                                                <?= t('delete', $translations, $lang) ?>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
