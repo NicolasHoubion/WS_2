@@ -4,6 +4,11 @@ require_once 'src/php/dbconn.php';
 require_once 'src/php/lang.php';  // Fichier de traduction
 require_once 'src/components/header.php';
 
+// Afficher les erreurs PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Récupère les préférences utilisateur
 $user_id = $_SESSION['id'] ?? 0;
 $lang = getLanguage($db, $user_id);

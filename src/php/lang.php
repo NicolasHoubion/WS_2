@@ -114,6 +114,9 @@ $translations = [
         'reset' => 'Réinitialiser',
         'edit_user' => 'Éditer l\'utilisateur',
         'ticket_deleted' => 'Ticket supprimé avec succès',
+        'page_not_found' => 'Page non trouvée',
+        '404_message' => 'Désolé, la page que vous recherchez n\'existe pas.',
+        'return_home' => 'Retour à la page d\'accueil',
     ],
 
     // ENGLISH TRANSLATE
@@ -199,6 +202,9 @@ $translations = [
         'edit_user' => 'Edit User',
         'settings_updated' => 'Settings updated successfully',
         'ticket_deleted' => 'Ticket deleted successfully',
+        'page_not_found' => 'Page not found',
+        '404_message' => 'Sorry, the page you are looking for does not exist.',
+        'return_home' => 'Return to home page',
     ],
 
     // DUTCH TRANSLATE
@@ -286,6 +292,9 @@ $translations = [
         'reset' => 'Resetten',
         'edit_user' => 'Bewerk gebruiker',
         'ticket_deleted' => 'Ticket succesvol verwijderd',
+        'page_not_found' => 'Pagina niet gevonden',
+        '404_message' => 'Sorry, de pagina die u zoekt bestaat niet.',
+        'return_home' => 'Terug naar de startpagina',
     ],
 
     // MANDARIN TRANSLATE
@@ -373,6 +382,9 @@ $translations = [
         'reset' => '重置',
         'edit_user' => '编辑用户',
         'ticket_deleted' => '工单已成功删除',
+        'page_not_found' => '页面未找到',
+        '404_message' => '抱歉，您要找的页面不存在。',
+        'return_home' => '返回主页',
     ],
     // PUNJABI TRANSLATE
     'pa' => [
@@ -458,6 +470,9 @@ $translations = [
         'reset' => 'ਰੀਸੈਟ ਕਰੋ',
         'edit_user' => 'ਉਪਭੋਗਤਾ ਸੋਧੋ',
         'ticket_deleted' => 'ਟਿਕਟ ਸਫਲਤਾਪੂਰਕ ਹਟਾਇਆ ਗਿਆ',
+        'page_not_found' => 'ਪੰਨਾ ਨਹੀਂ ਮਿਲਿਆ',
+        '404_message' => 'ਮਾਫ ਕਰਨਾ, ਤੁਸੀਂ ਜੋ ਪੰਨਾ ਲੱਭ ਰਹੇ ਹੋ ਉਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।',
+        'return_home' => 'ਮੁੱਖ ਪੰਨੇ ਤੇ ਵਾਪਸ ਜਾਓ',
     ],
 
     // SPANISH TRANSLATE
@@ -545,6 +560,9 @@ $translations = [
         'reset' => 'Restablecer',
         'edit_user' => 'Editar usuario',
         'ticket_deleted' => 'Ticket eliminado con éxito',
+        'page_not_found' => 'Página no encontrada',
+        '404_message' => 'Lo sentimos, la página que buscas no existe.',
+        'return_home' => 'Volver a la página de inicio',
     ],
 ];
 
