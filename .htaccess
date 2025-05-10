@@ -1,9 +1,0 @@
-Options -Indexes
-
-# Gestion des erreurs
-ErrorDocument 404 /404.php
-
-# Sécurité
-<Files .htaccess>
-    Require all denied
-</Files>
