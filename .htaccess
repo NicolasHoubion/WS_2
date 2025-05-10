@@ -1,0 +1,19 @@
+
+# Empêche l'affichage du contenu du dossier
+Options -Indexes
+
+# Active la réécriture d'URL
+RewriteEngine On
+
+# Redirige tout vers index.php (exemple pour un routeur PHP)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Protège le fichier .htaccess lui-même
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+# Redirige toutes les erreurs 404 vers 404.php
+ErrorDocument 404 /404.php
