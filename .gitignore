@@ -2,3 +2,10 @@
 /composer.lock
 /composer.json
 /.htaccess
+
+#je note comment faire le gitignore pour ne pas oublié
+
+# voici comment comment configurer le gitignore pour ignorer les fichiers et dossiers spécifiques dans un projet PHP :
+# git rm --cached (nom du fichier ou du dossier)
+# aprés cela tu peux faire un commit pour valider les changements et faire un git push
+# il faut spécifier le nom du fichier ou du dossier que tu veux ignorer dans le fichier .gitignore
