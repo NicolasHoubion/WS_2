@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION);
 require_once 'src/php/dbconn.php';
 require_once 'src/php/lang.php';  // Fichier de traduction
 require_once 'src/components/header.php';
