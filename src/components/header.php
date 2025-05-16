@@ -75,7 +75,7 @@ if (isset($_SESSION['id'])) {
         </a>
         <?php if ($isAdmin): ?>
           <a href="admin.php" class="font-medium hover:text-indigo-200 transition">
-            <?= t('dashboard', $translations, $lang) ?>
+            <?= t('admin_panel', $translations, $lang) ?>
           </a>
         <?php endif; ?>
       </nav>

@@ -54,7 +54,7 @@ $theme = getTheme($db, $user_id);
 
     <main class="flex-grow max-w-7xl mx-auto p-6">
         <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
-            <h2 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200"><?= t('create_account', $translations, $lang) ?></h2>
+            <h2 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200">Create an account</h2>
 
             <?php if (isset($_GET['error'])) { ?>
                 <div class="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4 text-center">
@@ -70,31 +70,31 @@ $theme = getTheme($db, $user_id);
 
             <form action="./src/php/signup.php" method="post">
                 <div class="mb-6">
-                    <label for="fname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('full_name', $translations, $lang) ?></label>
+                    <label for="fname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Full name</label>
                     <input type="text" id="fname" name="fname" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value="<?php echo (isset($_GET['fname'])) ? $_GET['fname'] : "" ?>" required>
                 </div>
 
                 <div class="mb-6">
-                    <label for="uname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('username', $translations, $lang) ?></label>
+                    <label for="uname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Username</label>
                     <input type="text" id="uname" name="uname" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value="<?php echo (isset($_GET['uname'])) ? $_GET['uname'] : "" ?>" required>
                 </div>
 
                 <div class="mb-6">
-                    <label for="pass" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('password', $translations, $lang) ?></label>
+                    <label for="pass" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Password</label>
                     <input type="password" id="pass" name="pass" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" required>
                 </div>
 
                 <div class="mb-6">
-                    <label for="email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('email', $translations, $lang) ?></label>
+                    <label for="email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Email</label>
                     <input type="email" id="email" name="email" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value="<?php echo (isset($_GET['email'])) ? $_GET['email'] : "" ?>" required>
                 </div>
 
-                <button type="submit" class="w-full gradient-bg text-white font-bold py-3 px-6 rounded-lg transition duration-200"><?= t('signup', $translations, $lang) ?></button>
+                <button type="submit" class="w-full gradient-bg text-white font-bold py-3 px-6 rounded-lg transition duration-200">Signup</button>
             </form>
 
             <div class="mt-6 text-center">
-                <span class="text-gray-600 dark:text-gray-400"><?= t('already_have_account', $translations, $lang) ?></span>
-                <a href="login.php" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold"><?= t('sign_in', $translations, $lang) ?></a>
+                <span class="text-gray-600 dark:text-gray-400">Already have an account ?</span>
+                <a href="login.php" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">Sign in</a>
             </div>
         </div>
     </main>

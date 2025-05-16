@@ -64,21 +64,21 @@ $theme = getTheme($db, $user_id);
 
             <form action="src/php/login.php" method="post" class="space-y-6">
                 <div>
-                    <label for="uname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('username', $translations, $lang) ?></label>
+                    <label for="uname" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Username</label>
                     <input type="text" id="uname" name="uname" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value="<?php echo isset($_GET['uname']) ? htmlspecialchars($_GET['uname']) : '' ?>" required>
                 </div>
 
                 <div>
-                    <label for="pass" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2"><?= t('password', $translations, $lang) ?></label>
+                    <label for="pass" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Password</label>
                     <input type="password" id="pass" name="pass" class="w-full px-5 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" required>
                 </div>
 
-                <button type="submit" class="w-full gradient-bg text-white font-bold py-3 px-6 rounded-lg transition duration-200"><?= t('login', $translations, $lang) ?></button>
+                <button type="submit" class="w-full gradient-bg text-white font-bold py-3 px-6 rounded-lg transition duration-200">Login</button>
             </form>
 
             <div class="mt-6 text-center">
-                <span class="text-gray-600 dark:text-gray-400"><?= t('no_account', $translations, $lang) ?></span>
-                <a href="signup.php" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold"><?= t('create_account', $translations, $lang) ?></a>
+                <span class="text-gray-600 dark:text-gray-400">No account ?</span>
+                <a href="signup.php" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">Create an account</a>
             </div>
         </div>
     </main>
