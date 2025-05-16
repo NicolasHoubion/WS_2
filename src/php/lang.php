@@ -134,7 +134,7 @@ $translations = [
         'contact' => 'Contact',
         'faq' => 'FAQ',
         'user_guide' => 'Guide de l\'utilisateur',
-        'footer_description' => 'on estt là pour vous aider à chaque étape du processus.',
+        'footer_description' => 'on est là pour vous aider à chaque étape du processus.',
         'home' => 'Accueil',
         'dashboard' => 'Tableau de bord',
         'profile_settings' => 'Paramètres du profil',
@@ -146,6 +146,10 @@ $translations = [
         'title_placeholder' => 'Entrez le titre du ticket',
         'message_placeholder' => 'Entrez le message du ticket',
         'edit_user_subtitle' => 'Modifiez les informations de l\'utilisateur',
+        'no_tickets_title' => 'Aucun ticket trouvé',
+        'confirm_delete_ticket' => 'Êtes-vous sûr de vouloir supprimer ce ticket ?',
+        'confirm_delete_user' => 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?',
+        'contact_support' => 'Contacter le support',
     ],
 
     // ENGLISH TRANSLATE
@@ -262,6 +266,10 @@ $translations = [
         'title_placeholder' => 'Enter ticket title',
         'message_placeholder' => 'Enter ticket message',
         'edit_user_subtitle' => 'Edit user information',
+        'no_tickets_title' => 'No tickets found',
+        'confirm_delete_ticket' => 'Are you sure you want to delete this ticket?',
+        'confirm_delete_user' => 'Are you sure you want to delete this user?',
+        'contact_support' => 'Contact Support',
     ],
 
     // DUTCH TRANSLATE
@@ -380,6 +388,10 @@ $translations = [
         'title_placeholder' => 'Voer de titel van het ticket in',
         'message_placeholder' => 'Voer het bericht van het ticket in',
         'edit_user_subtitle' => 'Bewerk gebruikersinformatie',
+        'no_tickets_title' => 'Geen tickets gevonden',
+        'confirm_delete_ticket' => 'Weet u zeker dat u dit ticket wilt verwijderen?',
+        'comfirm_delete_user' => 'Weet u zeker dat u deze gebruiker wilt verwijderen?',
+        'contact_support' => 'Neem contact op met de ondersteuning',
     ],
 
     // MANDARIN TRANSLATE
@@ -498,6 +510,10 @@ $translations = [
         'title_placeholder' => '输入工单标题',
         'message_placeholder' => '输入工单消息',
         'edit_user_subtitle' => '编辑用户信息',
+        'no_tickets_title' => '未找到工单',
+        'confirm_delete_ticket' => '您确定要删除此工单吗？',
+        'confirm_delete_user' => '您确定要删除此用户吗？',
+        'contact_support' => '联系支持',
     ],
     // PUNJABI TRANSLATE
     'pa' => [
@@ -615,6 +631,10 @@ $translations = [
         'title_placeholder' => 'ਟਿਕਟ ਦਾ ਸਿਰਲੇਖ ਦਰਜ ਕਰੋ',
         'message_placeholder' => 'ਟਿਕਟ ਦਾ ਸੁਨੇਹਾ ਦਰਜ ਕਰੋ',
         'edit_user_subtitle' => 'ਉਪਭੋਗਤਾ ਜਾਣਕਾਰੀ ਸੋਧੋ',
+        'no_tickets_title' => 'ਕੋਈ ਟਿਕਟ ਨਹੀਂ ਮਿਲਿਆ',
+        'confirm_delete_ticket' => 'ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਹੋ ਕਿ ਤੁਸੀਂ ਇਸ ਟਿਕਟ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?',
+        'confirm_delete_user' => 'ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਹੋ ਕਿ ਤੁਸੀਂ ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?',
+        'contact_support' => 'ਸਹਾਇਤਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ',
     ],
 
     // SPANISH TRANSLATE
@@ -733,6 +753,10 @@ $translations = [
         'title_placeholder' => 'Ingresa el título del ticket',
         'message_placeholder' => 'Ingresa el mensaje del ticket',
         'edit_user_subtitle' => 'Editar información del usuario',
+        'no_tickets_title' => 'No se encontraron tickets',
+        'confirm_delete_ticket' => '¿Estás seguro de que deseas eliminar este ticket?',
+        'confirm_delete_user' => '¿Estás seguro de que deseas eliminar este usuario?',
+        'contact_support' => 'Contactar soporte',
     ],
 ];
 

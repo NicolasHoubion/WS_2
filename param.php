@@ -124,11 +124,11 @@ require_once 'src/components/header.php';
                         <i class="fas fa-moon mr-2"></i><?= t('theme', $translations, $lang) ?>
                     </label>
                     <div class="flex space-x-4">
-                        <label class="flex items-center text-gray-700 dark:text-gray-400">
+                        <!-- <label class="flex items-center text-gray-700 dark:text-gray-400">
                             <input type="radio" name="settings[theme]" value="light"
                                 <?= ($userSettings['theme'] ?? 'light') === 'light' ? 'checked' : '' ?> class="mr-2 accent-blue-600">
                             <i class="fas fa-sun mr-1"></i><?= t('light_theme', $translations, $lang) ?>
-                        </label>
+                        </label> -->
                         <label class="flex items-center text-gray-700 dark:text-gray-400">
                             <input type="radio" name="settings[theme]" value="dark"
                                 <?= ($userSettings['theme'] ?? 'light') === 'dark' ? 'checked' : '' ?> class="mr-2 accent-blue-600">
