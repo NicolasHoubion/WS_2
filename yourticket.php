@@ -105,12 +105,34 @@ try {
     }
   </script>
   <style>
+    :root {
+      --gradient-start: #6366f1; /* indigo-500 */
+      --gradient-end: #a5b4fc;   /* indigo-200 */
+      --cta-bg: #f9fafb;         /* gray-50, plus doux */
+      --cta-text: #312e81;       /* indigo-900 */
+      --section-bg: #f9fafb;     /* gray-50, plus doux */
+      --feature-bg: #f9fafb;     /* gray-50, plus doux */
+      --body-bg: #f9fafb;        /* gray-50, plus doux */
+    }
+
+    .dark {
+      --gradient-start: #3730A3;
+      --gradient-end: #6D28D9;
+      --cta-bg: #1e293b;         /* slate-800 */
+      --cta-text: #fff;
+      --section-bg: #1e293b;
+      --feature-bg: #374151;     /* gray-700 */
+      --body-bg: #111827;        /* gray-900 */
+    }
+
+    body {
+      background: var(--body-bg) !important;
+    }
+
     .gradient-bg {
       background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     }
-    .dark .gradient-bg {
-      background: linear-gradient(135deg, #3730A3 0%, #6D28D9 100%);
-    }
+
     .gradient-text {
       background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
       -webkit-background-clip: text;
@@ -118,16 +140,32 @@ try {
       -webkit-text-fill-color: transparent;
       color: transparent;
     }
-    .dark .gradient-text {
-      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
+
+    .soft-section {
+      background: var(--section-bg);
+    }
+
+    .feature-card {
+      background: var(--feature-bg);
+      border: 1px solid #e5e7eb; /* Ajout d'une bordure pour les cartes */
+    }
+
+    .cta-soft {
+      background: var(--body-bg); /* même couleur que le body */
+      color: var(--cta-text);
+    }
+
+    .cta-soft .cta-btn {
+      background: var(--gradient-start);
+      color: #fff;
+    }
+
+    .cta-soft .cta-btn:hover {
+      opacity: 0.9;
     }
   </style>
 </head>
-<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+<body class="min-h-screen transition-colors duration-200">
   <?php require_once './src/components/header.php'; ?>
 
   <main class="flex-grow py-12 px-4">
@@ -193,10 +231,10 @@ try {
                     <?= date('d/m/Y H:i', strtotime($t['Created_at'])) ?>
                   </p>
                   <?php if (in_array($user_role, ['admin', 'helper']) || $t['User_id'] == $user_id): ?>
-                    <form method="post" class="inline-block" 
+                    <form method="post" class="inline-block"
                           onsubmit="return confirm('<?= t('confirm_delete_ticket', $translations, $lang) ?>');">
                       <input type="hidden" name="delete_ticket_id" value="<?= $t['Id'] ?>">
-                      <button type="submit" 
+                      <button type="submit"
                               class="text-red-500 hover:text-red-700 dark:hover:text-red-400 transition"
                               title="<?= t('delete', $translations, $lang) ?>">
                         <i class="fas fa-trash-alt"></i>
@@ -205,7 +243,7 @@ try {
                   <?php endif; ?>
                 </div>
 
-                <a href="ticket_view.php?id=<?= $t['Id'] ?>" 
+                <a href="ticket_view.php?id=<?= $t['Id'] ?>"
                    class="gradient-bg text-white block text-center py-2.5 px-6 rounded-lg font-medium shadow-sm hover:opacity-90 transition">
                   <i class="fas fa-comments mr-2"></i>
                   <?= t('view_conversation', $translations, $lang) ?>

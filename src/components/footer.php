@@ -3,12 +3,111 @@ require_once __DIR__ . '/../php/dbconn.php';
 require_once __DIR__ . '/../php/lang.php';
 
 $lang = 'fr';
+$theme = 'light';
 if (isset($_SESSION['id'])) {
     $lang = getLanguage($db, $_SESSION['id']);
+    $theme = getTheme($db, $_SESSION['id']);
 }
 ?>
 
-<footer class="bg-gray-800 text-white py-12 dark:bg-gray-900">
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const html = document.documentElement;
+        const serverTheme = '<?= $theme ?>';
+        console.log('Thème depuis PHP :', serverTheme); // Ajoutez cette ligne pour vérifier la valeur dans la console
+        html.classList.toggle('dark', serverTheme === 'dark');
+        if (localStorage.getItem('theme') !== serverTheme) {
+            localStorage.setItem('theme', serverTheme);
+        }
+    });
+</script>
+
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary: {
+            light: '#4F46E5',
+            dark: '#3730A3'
+          },
+          secondary: {
+            light: '#7C3AED',
+            dark: '#6D28D9'
+          }
+        },
+        gradientColorStops: theme => ({
+          'gradient-start': theme('colors.primary.light'),
+          'gradient-end': theme('colors.secondary.light'),
+        })
+      }
+    }
+  }
+</script>
+
+<style>
+:root {
+    --gradient-start: #6366f1;
+    --gradient-end: #a5b4fc;
+    --cta-bg: #f9fafb;
+    --cta-text: #312e81;
+    --section-bg: #f9fafb;
+    --feature-bg: #f9fafb;
+    --body-bg: #f9fafb;
+}
+
+.dark {
+    --gradient-start: #3730A3;
+    --gradient-end: #6D28D9;
+    --cta-bg: #1e293b;
+    --cta-text: #fff;
+    --section-bg: #1e293b;
+    --feature-bg: #374151;
+    --body-bg: #111827;
+}
+
+body {
+    background: var(--body-bg) !important;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.soft-section {
+    background: var(--section-bg);
+}
+
+.feature-card {
+    background: var(--feature-bg);
+    border: 1px solid #e5e7eb;
+}
+
+.cta-soft {
+    background: var(--body-bg);
+    color: var(--cta-text);
+}
+
+.cta-soft .cta-btn {
+    background: var(--gradient-start);
+    color: #fff;
+}
+
+.cta-soft .cta-btn:hover {
+    opacity: 0.9;
+}
+</style>
+
+<footer class="bg-gray-100 text-gray-800 py-12 dark:bg-gray-900 dark:text-white">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Column 1 - About -->
@@ -29,8 +128,8 @@ if (isset($_SESSION['id'])) {
                     <li><a href="index.php" class="hover:text-white dark:hover:text-gray-100 transition"><?= t('home', $translations, $lang) ?></a></li>
                     <li><a href="yourticket.php" class="hover:text-white dark:hover:text-gray-100 transition"><?= t('my_tickets', $translations, $lang) ?></a></li>
                     <li><a href="create_ticket.php" class="hover:text-white dark:hover:text-gray-100 transition"><?= t('new_ticket', $translations, $lang) ?></a></li>
-                    <?php if($isAdmin): ?>
-                    <li><a href="dashboard.php" class="hover:text-white dark:hover:text-gray-100 transition"><?= t('dashboard', $translations, $lang) ?></a></li>
+                    <?php if ($isAdmin): ?>
+                        <li><a href="dashboard.php" class="hover:text-white dark:hover:text-gray-100 transition"><?= t('dashboard', $translations, $lang) ?></a></li>
                     <?php endif; ?>
                 </ul>
             </div>

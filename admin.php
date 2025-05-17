@@ -150,7 +150,6 @@ try {
 
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" class="<?= $theme === 'dark' ? 'dark' : '' ?>">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -181,28 +180,67 @@ try {
         }
     </script>
     <style>
+        :root {
+            --gradient-start: #6366f1;
+            --gradient-end: #a5b4fc;
+            --cta-bg: #f9fafb;
+            --cta-text: #312e81;
+            --section-bg: #f9fafb;
+            --feature-bg: #f9fafb;
+            --body-bg: #f9fafb;
+        }
+
+        .dark {
+            --gradient-start: #3730A3;
+            --gradient-end: #6D28D9;
+            --cta-bg: #1e293b;
+            --cta-text: #fff;
+            --section-bg: #1e293b;
+            --feature-bg: #374151;
+            --body-bg: #111827;
+        }
+
+        body {
+            background: var(--body-bg) !important;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
         }
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #3730A3 0%, #6D28D9 100%);
-        }
+
         .gradient-text {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             -webkit-background-clip: text;
-            background-clip: text; /* Ajouté pour compatibilité */
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
         }
-        .dark .gradient-text {
-            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-            -webkit-background-clip: text;
-            background-clip: text; /* Ajouté pour compatibilité */
-            -webkit-text-fill-color: transparent;
+
+        .soft-section {
+            background: var(--section-bg);
+        }
+
+        .feature-card {
+            background: var(--feature-bg);
+            border: 1px solid #e5e7eb;
+        }
+
+        .cta-soft {
+            background: var(--body-bg);
+            color: var(--cta-text);
+        }
+
+        .cta-soft .cta-btn {
+            background: var(--gradient-start);
+            color: #fff;
+        }
+
+        .cta-soft .cta-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
-
-<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+<body class="min-h-screen transition-colors duration-200">
     <?php require_once 'src/components/header.php'; ?>
 
     <main class="flex-grow py-12 px-4">
@@ -330,7 +368,7 @@ try {
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <i class="fas fa-search text-gray-400 dark:text-gray-500"></i>
                                 </div>
-                                <input type="text" name="search" value="<?= htmlspecialchars($searchTermRaw) ?>" 
+                                <input type="text" name="search" value="<?= htmlspecialchars($searchTermRaw) ?>"
                                     placeholder="<?= t('search_users', $translations, $lang) ?>"
                                     class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5">
                             </div>
@@ -452,12 +490,11 @@ try {
             // Navigation par onglets
             const tabLinks = document.querySelectorAll('a[href^="#"]');
             const sections = document.querySelectorAll('section[id]');
-            
+
             function setActiveTab(targetId) {
-                // Mise à jour des onglets
                 tabLinks.forEach(link => {
                     const isActive = link.getAttribute('href') === `#${targetId}`;
-                    
+
                     if (isActive) {
                         link.classList.add('border-indigo-600', 'dark:border-indigo-500', 'text-indigo-600', 'dark:text-indigo-500');
                         link.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
@@ -469,54 +506,42 @@ try {
                     }
                 });
             }
-            
-            // Gestion du clic sur les onglets
+
             tabLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = link.getAttribute('href').substring(1);
-                    
-                    // Mise à jour de l'URL sans recharger la page
+
                     history.pushState(null, null, `#${targetId}`);
-                    
-                    // Mise à jour des onglets
                     setActiveTab(targetId);
-                    
-                    // Scroll vers la section
+
                     document.getElementById(targetId).scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 });
             });
-            
-            // Détection de l'ancre dans l'URL au chargement
+
             const hash = window.location.hash.substring(1);
             if (hash && document.getElementById(hash)) {
                 setActiveTab(hash);
             }
 
-            // Mobile menu toggle
             const menuBtn = document.querySelector('.mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            
+
             if (menuBtn && mobileMenu) {
                 menuBtn.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
                 });
             }
-            
-            // Gestion du thème sombre/clair
+
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
                 themeToggle.addEventListener('click', () => {
                     document.documentElement.classList.toggle('dark');
-                    
-                    // Sauvegarder la préférence
                     const isDark = document.documentElement.classList.contains('dark');
                     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                    
-                    // Mettre à jour l'icône
                     const moonIcon = themeToggle.querySelector('.fa-moon');
                     const sunIcon = themeToggle.querySelector('.fa-sun');
                     moonIcon.classList.toggle('hidden');
@@ -524,7 +549,6 @@ try {
                 });
             }
 
-            // Gestion des filtres utilisateurs
             const searchInput = document.querySelector('input[name="search"]');
             if (searchInput) {
                 searchInput.addEventListener('input', debounce(() => {
@@ -543,7 +567,6 @@ try {
     </script>
 
     <script>
-        // Confirmation avant suppression
         document.querySelectorAll('.delete-user-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 if (!confirm('<?= t('confirm_delete_user', $translations, $lang) ?>')) {
@@ -552,7 +575,6 @@ try {
             });
         });
 
-        // Gestion responsive des tableaux
         function adjustTableLayout() {
             const tables = document.querySelectorAll('table');
             tables.forEach(table => {
@@ -572,3 +594,4 @@ try {
 <?php
 // Fermer la connexion
 $db = null;
+?>

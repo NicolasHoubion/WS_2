@@ -55,32 +55,36 @@ if (isset($_SESSION['id'])) {
   }
 </script>
 
-<header class="gradient-bg text-white shadow-lg">
-  <div class="container mx-auto px-4 py-6">
+<header class="bg-white shadow-md dark:bg-gray-900 transition-colors duration-200">
+  <div class="container mx-auto px-4 py-4">
     <div class="flex justify-between items-center">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <i class="fas fa-ticket-alt text-2xl"></i>
-        <h1 class="text-2xl font-bold"><?= t('site_title', $translations, $lang) ?></h1>
+        <i class="fas fa-ticket-alt text-2xl text-indigo-600 dark:text-indigo-400"></i>
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white"><?= t('site_title', $translations, $lang) ?></h1>
       </div>
 
       <!-- Navigation Desktop -->
       <nav class="hidden md:flex space-x-8">
         <a href="index.php"
-          class="font-medium hover:text-indigo-200 transition <?= strpos($currentPage, 'index.php') !== false ? 'border-b-2 border-indigo-200 font-bold' : '' ?>">
+          class="font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition 
+                 <?= strpos($currentPage, 'index.php') !== false ? 'border-b-2 border-indigo-600 dark:border-indigo-400' : '' ?>">
           <?= t('home', $translations, $lang) ?>
         </a>
         <a href="yourticket.php"
-          class="font-medium hover:text-indigo-200 transition <?= strpos($currentPage, 'yourticket.php') !== false ? 'border-b-2 border-indigo-200 font-bold' : '' ?>">
+          class="font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition 
+                 <?= strpos($currentPage, 'yourticket.php') !== false ? 'border-b-2 border-indigo-600 dark:border-indigo-400' : '' ?>">
           <?= t('my_tickets', $translations, $lang) ?>
         </a>
         <a href="create_ticket.php"
-          class="font-medium hover:text-indigo-200 transition <?= strpos($currentPage, 'create_ticket.php') !== false ? 'border-b-2 border-indigo-200 font-bold' : '' ?>">
+          class="font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition 
+                 <?= strpos($currentPage, 'create_ticket.php') !== false ? 'border-b-2 border-indigo-600 dark:border-indigo-400' : '' ?>">
           <?= t('new_ticket', $translations, $lang) ?>
         </a>
         <?php if ($isAdmin): ?>
           <a href="admin.php"
-            class="font-medium hover:text-indigo-200 transition <?= strpos($currentPage, 'admin.php') !== false ? 'border-b-2 border-indigo-200 font-bold' : '' ?>">
+            class="font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition 
+                   <?= strpos($currentPage, 'admin.php') !== false ? 'border-b-2 border-indigo-600 dark:border-indigo-400' : '' ?>">
             <?= t('admin_panel', $translations, $lang) ?>
           </a>
         <?php endif; ?>
@@ -91,34 +95,35 @@ if (isset($_SESSION['id'])) {
         <?php if (isset($_SESSION['fname'])) : ?>
           <!-- Dropdown menu for user profile - Desktop -->
           <div class="hidden md:block relative">
-            <button id="userDropdownButton" class="flex items-center space-x-2 focus:outline-none">
-              <div class="h-8 w-8 rounded-full bg-white/30 overflow-hidden">
+            <button id="userDropdownButton" class="flex items-center space-x-2 focus:outline-none group">
+              <div class="h-8 w-8 rounded-full overflow-hidden border-2 border-indigo-100 dark:border-gray-600">
                 <img src="/src/images/<?= htmlspecialchars($userImage) ?>" alt="Profile" class="h-full w-full object-cover">
               </div>
-              <span><?= htmlspecialchars($_SESSION['fname']) ?></span>
-              <i class="fas fa-chevron-down ml-1 text-xs"></i>
+              <span class="text-gray-700 dark:text-gray-200 group-hover:text-indigo-600 transition"><?= htmlspecialchars($_SESSION['fname']) ?></span>
+              <i class="fas fa-chevron-down ml-1 text-xs text-gray-600 dark:text-gray-400"></i>
             </button>
             <!-- Dropdown content -->
-            <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden border border-gray-200 dark:border-gray-700">
-              <a href="profil.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition">
-                <i class="fas fa-user-circle mr-2"></i><?= t('profile', $translations, $lang) ?>
+            <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-2 z-50 hidden border border-gray-100 dark:border-gray-700">
+              <a href="profil.php" class="block px-4 py-2.5 text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 transition">
+                <i class="fas fa-user-circle mr-2 text-indigo-600 dark:text-indigo-400"></i><?= t('profile', $translations, $lang) ?>
               </a>
-              <a href="param.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition">
-                <i class="fas fa-cog mr-2"></i><?= t('settings', $translations, $lang) ?>
+              <a href="param.php" class="block px-4 py-2.5 text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 transition">
+                <i class="fas fa-cog mr-2 text-indigo-600 dark:text-indigo-400"></i><?= t('settings', $translations, $lang) ?>
               </a>
-              <div class="border-t border-gray-200"></div>
-              <a href="/src/php/logout.php" class="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition">
-                <i class="fas fa-sign-out-alt mr-2"></i><?= t('logout', $translations, $lang) ?>
+              <div class="border-t border-gray-100 dark:border-gray-700 my-2"></div>
+              <a href="/src/php/logout.php" class="block px-4 py-2.5 text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 transition">
+                <i class="fas fa-sign-out-alt mr-2 text-indigo-600 dark:text-indigo-400"></i><?= t('logout', $translations, $lang) ?>
               </a>
             </div>
           </div>
         <?php else: ?>
-          <a href="login.php" class="hidden md:block font-medium hover:text-indigo-200 transition">
+          <a href="login.php" class="hidden md:block font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 transition">
             <?= t('login', $translations, $lang) ?>
           </a>
         <?php endif; ?>
 
-        <button class="md:hidden text-2xl" id="mobile-menu-button">
+        <!-- Bouton menu mobile toujours avec l'id -->
+        <button id="mobile-menu-button" class="md:hidden text-2xl text-gray-600 hover:text-indigo-600 dark:text-gray-300">
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -127,50 +132,51 @@ if (isset($_SESSION['id'])) {
 
   <!-- Mobile Menu -->
   <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="mobile-menu">
-    <div class="bg-white dark:bg-gray-800 h-full w-64 p-6">
+    <div class="bg-white dark:bg-gray-800 h-full w-64 p-6 shadow-xl">
       <div class="flex justify-between items-center mb-8">
         <div class="flex items-center space-x-2">
           <i class="fas fa-ticket-alt text-xl text-indigo-600 dark:text-indigo-400"></i>
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200"><?= t('site_title', $translations, $lang) ?></h2>
+          <h2 class="text-xl font-bold text-gray-800 dark:text-white"><?= t('site_title', $translations, $lang) ?></h2>
         </div>
-        <button class="text-2xl text-gray-800 dark:text-gray-200" id="close-menu">
+        <!-- Bouton de fermeture du menu mobile -->
+        <button id="close-menu" class="text-2xl text-gray-600 hover:text-indigo-600 dark:text-gray-300">
           <i class="fas fa-times"></i>
         </button>
       </div>
-      <nav class="space-y-4">
+      <nav class="space-y-3">
         <a href="index.php"
-          class="block py-2 text-gray-800 dark:text-gray-200 font-medium
-            hover:text-indigo-600 dark:hover:text-indigo-400 transition
-            <?= strpos($currentPage, 'index.php') !== false
-              ? 'text-indigo-600 dark:text-indigo-400 border-l-4 border-indigo-600 pl-3'
-              : '' ?>">
+          class="flex items-center p-3 rounded-lg
+                 <?= strpos($currentPage, 'index.php') !== false
+                    ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-600 dark:text-indigo-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700' ?>">
+          <i class="fas fa-home mr-3"></i>
           <?= t('home', $translations, $lang) ?>
         </a>
         <a href="yourticket.php"
-          class="block py-2 text-gray-800 dark:text-gray-200 font-medium
-            hover:text-indigo-600 dark:hover:text-indigo-400 transition
-            <?= strpos($currentPage, 'yourticket.php') !== false
-              ? 'text-indigo-600 dark:text-indigo-400 border-l-4 border-indigo-600 pl-3'
-              : '' ?>">
+          class="flex items-center p-3 rounded-lg
+                 <?= strpos($currentPage, 'yourticket.php') !== false
+                    ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-600 dark:text-indigo-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700' ?>">
+          <i class="fas fa-ticket-alt mr-3"></i>
           <?= t('my_tickets', $translations, $lang) ?>
         </a>
         <a href="create_ticket.php"
-          class="block py-2 text-gray-800 dark:text-gray-200 font-medium
-            hover:text-indigo-600 dark:hover:text-indigo-400 transition
-            <?= strpos($currentPage, 'create_ticket.php') !== false
-              ? 'text-indigo-600 dark:text-indigo-400 border-l-4 border-indigo-600 pl-3'
-              : '' ?>">
+          class="flex items-center p-3 rounded-lg
+                 <?= strpos($currentPage, 'create_ticket.php') !== false
+                    ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-600 dark:text-indigo-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700' ?>">
+          <i class="fas fa-plus mr-3"></i>
           <?= t('new_ticket', $translations, $lang) ?>
         </a>
         <?php if ($isAdmin): ?>
           <a href="admin.php"
-          class="block py-2 text-gray-800 dark:text-gray-200 font-medium
-            hover:text-indigo-600 dark:hover:text-indigo-400 transition
-            <?= strpos($currentPage, 'admin.php') !== false
-              ? 'text-indigo-600 dark:text-indigo-400 border-l-4 border-indigo-600 pl-3'
-              : '' ?>">
-          <?= t('admin_panel', $translations, $lang) ?>
-        </a>
+            class="flex items-center p-3 rounded-lg
+                   <?= strpos($currentPage, 'admin.php') !== false
+                      ? 'bg-indigo-50 dark:bg-gray-700 text-indigo-600 dark:text-indigo-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700' ?>">
+            <i class="fas fa-tools mr-3"></i>
+            <?= t('admin_panel', $translations, $lang) ?>
+          </a>
         <?php endif; ?>
         <?php if (isset($_SESSION['fname'])) : ?>
           <!-- Ajout de l'image de profil dans le menu mobile -->

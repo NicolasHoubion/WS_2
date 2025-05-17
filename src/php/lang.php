@@ -15,13 +15,21 @@ function getLanguage($db, $user_id = null)
     }
 }
 
-function getTheme($db, $user_id)
-{
+function getTheme($db, $user_id) {
+    if ($user_id === 0) return 'light'; // Utilisateur non connecté
+    
     try {
-        $stmt = $db->prepare("SELECT setting_value FROM User_Settings WHERE user_id = ? AND setting_key = 'theme'");
+        $stmt = $db->prepare("SELECT setting_value 
+                             FROM User_Settings 
+                             WHERE user_id = ? 
+                             AND setting_key = 'theme'");
         $stmt->execute([$user_id]);
-        return $stmt->fetchColumn() ?? 'light';
+        $result = $stmt->fetchColumn();
+        
+        // Validation stricte
+        return in_array($result, ['light', 'dark']) ? $result : 'light';
     } catch (PDOException $e) {
+        error_log("Erreur theme : " . $e->getMessage());
         return 'light';
     }
 }

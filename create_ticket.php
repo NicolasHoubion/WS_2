@@ -166,12 +166,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     </script>
     <style>
+        :root {
+            --gradient-start: #6366f1; /* indigo-500 */
+            --gradient-end: #a5b4fc;   /* indigo-200 */
+            --cta-bg: #f9fafb;         /* gray-50, plus doux */
+            --cta-text: #312e81;       /* indigo-900 */
+            --section-bg: #f9fafb;     /* gray-50, plus doux */
+            --feature-bg: #f9fafb;     /* gray-50, plus doux */
+            --body-bg: #f9fafb;        /* gray-50, plus doux */
+        }
+
+        .dark {
+            --gradient-start: #3730A3;
+            --gradient-end: #6D28D9;
+            --cta-bg: #1e293b;         /* slate-800 */
+            --cta-text: #fff;
+            --section-bg: #1e293b;
+            --feature-bg: #374151;     /* gray-700 */
+            --body-bg: #111827;        /* gray-900 */
+        }
+
+        body {
+            background: var(--body-bg) !important;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
         }
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #3730A3 0%, #6D28D9 100%);
-        }
+
         .gradient-text {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             -webkit-background-clip: text;
@@ -179,16 +201,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             -webkit-text-fill-color: transparent;
             color: transparent;
         }
-        .dark .gradient-text {
-            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+
+        .soft-section {
+            background: var(--section-bg);
+        }
+
+        .feature-card {
+            background: var(--feature-bg);
+            border: 1px solid #e5e7eb; /* Ajout d'une bordure pour les cartes */
+        }
+
+        .cta-soft {
+            background: var(--body-bg); /* même couleur que le body */
+            color: var(--cta-text);
+        }
+
+        .cta-soft .cta-btn {
+            background: var(--gradient-start);
+            color: #fff;
+        }
+
+        .cta-soft .cta-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
-<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200"></body>
+<body class="min-h-screen transition-colors duration-200">
     <?php require_once 'src/components/header.php'; ?>
 
     <main class="flex-grow py-12 px-4">
@@ -221,9 +259,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <i class="fas fa-heading mr-2 text-indigo-500"></i>
                             <?= t('title', $translations, $lang) ?>
                         </label>
-                        <input 
-                            type="text" 
-                            name="title" 
+                        <input
+                            type="text"
+                            name="title"
                             id="title"
                             required
                             class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-300"
@@ -237,8 +275,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <i class="fas fa-comment-dots mr-2 text-indigo-500"></i>
                             <?= t('message', $translations, $lang) ?>
                         </label>
-                        <textarea 
-                            name="message" 
+                        <textarea
+                            name="message"
                             id="message"
                             rows="6"
                             required
@@ -249,8 +287,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     <!-- Bouton -->
                     <div class="text-center">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="gradient-bg text-white py-3 px-8 rounded-lg font-medium shadow-lg hover:opacity-90 transition transform hover:scale-105"
                         >
                             <i class="fas fa-plus-circle mr-2"></i>

@@ -43,19 +43,16 @@ if (isset($_POST['submit'])) {
             }
 
             if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadPath)) {
-                // Récupération de l'ancienne image
                 $stmt = $db->prepare("SELECT Image FROM Users WHERE Id = :id");
                 $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $oldImage = $stmt->fetchColumn();
 
-                // Mise à jour de la base de données
                 $stmt = $db->prepare("UPDATE Users SET Image = :image WHERE Id = :id");
                 $stmt->bindParam(':image', $newFileName, PDO::PARAM_STR);
                 $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
-                
+
                 if ($stmt->execute()) {
-                    // Suppression de l'ancienne image si nécessaire
                     if ($oldImage && $oldImage !== 'image_defaut.avif') {
                         $oldImagePath = $uploadDir . $oldImage;
                         if (file_exists($oldImagePath)) {
@@ -64,7 +61,6 @@ if (isset($_POST['submit'])) {
                     }
                     $_SESSION['success_message'] = t('profile_updated', $translations, $lang);
                 } else {
-                    // En cas d'échec de la requête SQL, on supprime la nouvelle image
                     unlink($uploadPath);
                     $_SESSION['error_message'] = t('db_error', $translations, $lang);
                 }
@@ -74,7 +70,7 @@ if (isset($_POST['submit'])) {
         } else {
             $_SESSION['error_message'] = t('file_type_error', $translations, $lang);
         }
-    } else if ($_FILES['profile_image']['error'] !== 4) { // 4 = UPLOAD_ERR_NO_FILE
+    } else if ($_FILES['profile_image']['error'] !== 4) {
         $_SESSION['error_message'] = t('image_error', $translations, $lang);
     }
     header("Location: profil.php");
@@ -114,12 +110,65 @@ if (isset($_POST['submit'])) {
         }
     </script>
     <style>
+        :root {
+            --gradient-start: #6366f1;
+            --gradient-end: #a5b4fc;
+            --cta-bg: #f9fafb;
+            --cta-text: #312e81;
+            --section-bg: #f9fafb;
+            --feature-bg: #f9fafb;
+            --body-bg: #f9fafb;
+        }
+
+        .dark {
+            --gradient-start: #3730A3;
+            --gradient-end: #6D28D9;
+            --cta-bg: #1e293b;
+            --cta-text: #fff;
+            --section-bg: #1e293b;
+            --feature-bg: #374151;
+            --body-bg: #111827;
+        }
+
+        body {
+            background: var(--body-bg) !important;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
         }
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #3730A3 0%, #6D28D9 100%);
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
+
+        .soft-section {
+            background: var(--section-bg);
+        }
+
+        .feature-card {
+            background: var(--feature-bg);
+            border: 1px solid #e5e7eb;
+        }
+
+        .cta-soft {
+            background: var(--body-bg);
+            color: var(--cta-text);
+        }
+
+        .cta-soft .cta-btn {
+            background: var(--gradient-start);
+            color: #fff;
+        }
+
+        .cta-soft .cta-btn:hover {
+            opacity: 0.9;
+        }
+
         .profile-image-container:hover .profile-image-overlay {
             opacity: 1;
         }
@@ -153,8 +202,8 @@ if (isset($_POST['submit'])) {
                         <?= htmlspecialchars($user['RoleName']) ?>
                     </div>
                     <div class="relative profile-image-container">
-                        <img src="src/images/<?= htmlspecialchars($user['Image'] ?: 'image_defaut.avif'); ?>" 
-                             alt="<?= t('profile_picture', $translations, $lang) ?>" 
+                        <img src="src/images/<?= htmlspecialchars($user['Image'] ?: 'image_defaut.avif'); ?>"
+                             alt="<?= t('profile_picture', $translations, $lang) ?>"
                              class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-md">
                         <div class="absolute inset-0 rounded-full profile-image-overlay bg-black bg-opacity-50 opacity-0 flex items-center justify-center transition-opacity duration-200">
                             <label for="profile_image" class="cursor-pointer text-white text-sm font-medium">
@@ -164,7 +213,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-3">
@@ -210,7 +259,7 @@ if (isset($_POST['submit'])) {
                         </h2>
                     </div>
                 </div>
-                
+
                 <div class="p-6">
                     <form action="profil.php" method="post" enctype="multipart/form-data">
                         <div class="mb-6">
@@ -231,7 +280,7 @@ if (isset($_POST['submit'])) {
                                 <?= t('image_formats', $translations, $lang) ?>: JPG, JPEG, PNG
                             </p>
                         </div>
-                        
+
                         <div class="flex justify-end">
                             <button type="submit" name="submit" class="gradient-bg text-white py-2 px-6 rounded-lg font-medium shadow-sm hover:opacity-90 transition">
                                 <?= t('update', $translations, $lang) ?>
@@ -247,10 +296,9 @@ if (isset($_POST['submit'])) {
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Afficher le nom du fichier sélectionné
             const fileInput = document.getElementById('profile_image');
             const fileNameSpan = document.getElementById('file-name');
-            
+
             fileInput.addEventListener('change', () => {
                 if (fileInput.files.length > 0) {
                     fileNameSpan.textContent = fileInput.files[0].name;
@@ -259,7 +307,6 @@ if (isset($_POST['submit'])) {
                 }
             });
 
-            // Theme persistence
             const html = document.documentElement;
             const theme = html.classList.contains('dark') ? 'dark' : 'light';
             localStorage.setItem('theme', theme);
